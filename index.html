@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Oaxaca de mi Corazón Tlayudería · Sitio de ejemplo</title>
+<meta name="description" content="Sitio de ejemplo para Oaxaca de mi Corazón Tlayudería, restaurante oaxaqueño en Puebla. Av. 5 Ote 404.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#4a1a0f">
+<style>
+  :root{
+    /* Dos tintas sobre papel: barro para todo, terracota solo para la tlayuda y la acción de DM */
+    --papel:#f3e6cf;
+    --barro:#4a1a0f;
+    --terracota:#a8401b;
+    --m:clamp(1rem,4vw,2.5rem);
+    --serif:"Iowan Old Style","Palatino Linotype","Palatino","Book Antiqua","Georgia",serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scrollbar-color:var(--barro) var(--papel);scroll-padding-top:4.5rem}
+  body{
+    margin:0;background:var(--papel);color:var(--barro);
+    font:400 1.0625rem/1.6 var(--serif);
+    caret-color:var(--terracota);
+    padding-bottom:5.5rem;
+  }
+  ::selection{background:var(--barro);color:var(--papel)}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration-thickness:2px;text-underline-offset:.2em}
+  :focus-visible{outline:3px solid var(--terracota);outline-offset:3px}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .wrap{width:min(1240px,100% - 2*var(--m));margin-inline:auto}
+
+  /* Letra tallada (SVG generado) */
+  .carve{display:block;height:100%;width:auto;overflow:visible}
+  .carve .ink{fill:currentColor}
+  .carve .fleck{fill:var(--fleck,var(--papel))}
+
+  /* Filete de imprenta: grueso + delgado */
+  .filete{border:0;height:7px;margin:0;border-top:3px solid currentColor;border-bottom:1px solid currentColor}
+
+  /* ---------- Etiqueta de demo ---------- */
+  .demo-tag{
+    background:var(--barro);color:var(--papel);
+    font:600 .8rem/1.4 var(--serif);letter-spacing:.01em;
+    text-align:center;padding:.55rem var(--m);
+  }
+  .demo-tag span{font-weight:400}
+
+  /* ---------- Encabezado ---------- */
+  .top{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 0}
+  .top nav{display:flex;gap:clamp(.9rem,3vw,2rem);font-size:1rem}
+  .top nav a{text-decoration:none;padding:.3rem 0;border-bottom:2px solid transparent;transition:border-color .2s}
+  .top nav a:hover{border-color:currentColor}
+
+  /* ---------- Sello (botón principal) ---------- */
+  .sello{
+    display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+    min-height:52px;padding:.8rem 1.4rem;
+    background:var(--terracota);color:var(--papel);
+    border:2px solid var(--barro);
+    font:700 1.06rem/1.15 var(--serif);letter-spacing:.01em;text-decoration:none;
+    transition:background-color .18s,color .18s,transform .12s;
+  }
+  .sello svg{width:20px;height:20px;flex:none}
+  .sello:hover,.sello:focus-visible{background:var(--barro);color:var(--papel)}
+  .sello:active{transform:translateY(2px)}
+  .sello.chico{min-height:42px;padding:.45rem .9rem;font-size:.95rem}
+  .linea{
+    display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+    min-height:52px;padding:.8rem 1.3rem;border:2px solid currentColor;
+    font:700 1.06rem/1.15 var(--serif);text-decoration:none;
+    transition:background-color .18s,color .18s;
+  }
+  .linea svg{width:20px;height:20px;flex:none}
+  .linea:hover,.linea:focus-visible{background:var(--barro);color:var(--papel);border-color:var(--barro)}
+
+  /* ---------- Hero: la plancha ---------- */
+  .plancha{
+    position:relative;border:3px solid var(--barro);outline:1px solid var(--barro);outline-offset:5px;
+    margin:6px 0 0;padding:clamp(1rem,3.5vw,2.2rem);
+  }
+  .nombre{
+    margin:0 0 clamp(.9rem,2.5vw,1.6rem);
+    font:700 clamp(1.15rem,3.6vw,1.55rem)/1.25 var(--serif);letter-spacing:-.005em;
+    display:flex;flex-wrap:wrap;justify-content:space-between;gap:.25rem 1rem;
+    padding-bottom:.7rem;border-bottom:1px solid var(--barro);
+  }
+  .nombre small{font-size:.72em;font-weight:400;font-style:italic;align-self:flex-end}
+  .tallado{position:relative;container-type:inline-size;margin:0}
+  .silabas{position:relative;z-index:2;display:flex;flex-direction:column;gap:2.2cqi}
+  .sil{display:block;height:35cqi;mix-blend-mode:multiply;animation:tirar 1.1s var(--ease) both}
+  .sil:nth-child(2){animation-delay:.12s}
+  .sil:nth-child(3){animation-delay:.24s}
+  @keyframes tirar{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+
+  .comal{
+    position:absolute;z-index:1;right:-2%;top:54.7cqi;
+    width:58cqi;aspect-ratio:1;margin:0;translate:0 -50%;
+    border-radius:50%;overflow:hidden;background:var(--terracota);
+    border:3px solid var(--barro);
+  }
+  .comal img{width:100%;height:100%;object-fit:cover;filter:url(#dos-tintas);will-change:transform}
+
+  .hero-pie{display:grid;gap:1.3rem;margin-top:clamp(1.2rem,3vw,2rem)}
+  .lead{margin:0;font-size:clamp(1.15rem,3.4vw,1.4rem);line-height:1.45;max-width:36ch}
+  .lead strong{font-weight:700}
+  .acciones{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.4rem}
+  .acciones .sello{flex:1 1 240px}
+  .dir{display:inline-flex;align-items:center;gap:.5rem;font-size:1.02rem;font-style:italic}
+  .dir svg{width:20px;height:20px;flex:none}
+
+  /* ---------- Secciones ---------- */
+  .seccion{padding:clamp(4rem,10vw,7.5rem) 0 clamp(3rem,7vw,5rem)}
+  .titulo-tallado{margin:0 0 clamp(1.2rem,3vw,2rem)}
+  .titulo-tallado .carve{width:100%;height:auto;max-width:980px}
+  .intro{max-width:52ch;margin:0 0 clamp(2rem,5vw,3.2rem);font-size:1.15rem}
+
+  /* Platillos como pliego */
+  .pliego{border-top:3px solid var(--barro)}
+  .entrada{
+    display:grid;gap:1.2rem;padding:clamp(1.6rem,4vw,2.6rem) 0;
+    border-bottom:1px solid var(--barro);
+  }
+  .entrada figure{margin:0;aspect-ratio:4/3;overflow:hidden;background:var(--barro);border:2px solid var(--barro)}
+  .entrada img{width:100%;height:100%;object-fit:cover;filter:url(#una-tinta);transition:transform .8s var(--ease)}
+  .entrada.estrella img{filter:url(#dos-tintas)}
+  .entrada:hover img{transform:scale(1.03)}
+  .entrada h3{margin:0;font:700 clamp(1.8rem,6vw,2.8rem)/1.05 var(--serif);letter-spacing:-.015em}
+  .entrada .marca-estrella{
+    display:inline-block;margin-left:.5rem;vertical-align:.45em;
+    font-size:.95rem;font-weight:700;font-style:italic;letter-spacing:0;color:var(--terracota);
+  }
+  .entrada p{margin:.7rem 0 0;max-width:46ch}
+  .entrada .pregunta{
+    display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;
+    font-weight:700;color:var(--terracota);
+  }
+  .entrada .pregunta:hover{color:var(--barro)}
+  .flecha{width:18px;height:18px;flex:none;transition:translate .25s var(--ease)}
+  .pregunta:hover .flecha{translate:4px 0}
+  .pendiente{border-bottom:3px solid var(--barro)}
+  .renglones{display:grid;gap:1.6rem;margin:1.4rem 0 .4rem;max-width:560px}
+  .renglones span{display:block;height:1px;border-bottom:1px dashed var(--barro)}
+  .renglones small{font-style:italic;font-size:.9rem}
+  .pendiente .sello{margin-top:1.4rem}
+
+  /* Visita */
+  .visita-grid{display:grid;gap:clamp(1.6rem,4vw,3rem)}
+  .direccion{margin:0;container-type:inline-size}
+  .direccion .dl{display:block;height:27cqi;margin-bottom:2cqi}
+  .visita-texto p{margin:0 0 1rem;max-width:40ch}
+  .ciudad{font:700 clamp(1.6rem,5vw,2.3rem)/1.1 var(--serif)}
+  .visita-foto{margin:0;aspect-ratio:4/5;overflow:hidden;background:var(--barro);border:3px solid var(--barro);outline:1px solid var(--barro);outline-offset:5px}
+  .visita-foto img{width:100%;height:100%;object-fit:cover;filter:url(#una-tinta)}
+
+  /* Contacto: el campo de tinta terracota */
+  .contacto{background:var(--terracota);color:var(--papel);--fleck:var(--terracota)}
+  .contacto-grid{display:grid;gap:clamp(1.4rem,4vw,3rem);align-items:end}
+  .dm{margin:0;container-type:inline-size}
+  .dm .carve{width:100%;height:auto;max-height:62vh}
+  .contacto p{margin:0 0 1.1rem;max-width:40ch}
+  .contacto .grande{font:700 clamp(1.7rem,5.5vw,2.6rem)/1.1 var(--serif);letter-spacing:-.015em}
+  .handle{display:inline-block;font:700 clamp(1.3rem,5vw,1.8rem)/1.2 var(--serif);margin:.3rem 0 1.6rem;word-break:break-all}
+  .contacto .sello{background:var(--papel);color:var(--barro);border-color:var(--papel)}
+  .contacto .sello:hover,.contacto .sello:focus-visible{background:var(--barro);color:var(--papel);border-color:var(--barro)}
+  .contacto :focus-visible{outline-color:var(--papel)}
+  .contacto ::selection{background:var(--papel);color:var(--terracota)}
+
+  /* Pie */
+  footer{background:var(--barro);color:var(--papel);padding:2.4rem 0 2.6rem;font-size:.95rem}
+  footer .wrap{display:grid;gap:.6rem}
+  footer p{margin:0}
+  .firma{justify-self:start;margin-top:.8rem;padding:.45rem .9rem;border:2px solid var(--papel);font-weight:700}
+  footer ::selection{background:var(--papel);color:var(--barro)}
+
+  /* Barra fija de DM en móvil */
+  .barra-dm{
+    position:fixed;inset:auto 0 0 0;z-index:30;
+    padding:.7rem var(--m) calc(.7rem + env(safe-area-inset-bottom));
+    background:var(--papel);border-top:3px solid var(--barro);
+    translate:0 110%;transition:translate .45s var(--ease);
+  }
+  .barra-dm.visible{translate:0 0}
+  .barra-dm .sello{width:100%}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .sil{animation:none}
+    .barra-dm,.entrada img,.sello,.linea{transition:none}
+  }
+
+  /* ---------- Tableta ---------- */
+  @media (min-width:700px){
+    .entrada{grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:center;gap:clamp(1.6rem,4vw,3.5rem)}
+    .entrada.estrella{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+    .entrada.estrella figure{aspect-ratio:5/4}
+    .pendiente{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+    .pendiente > div{grid-column:2}
+  }
+
+  /* ---------- Escritorio ---------- */
+  @media (min-width:1000px){
+    body{padding-bottom:0}
+    .barra-dm{display:none}
+    .silabas{flex-direction:row;gap:1.85cqi}
+    .sil{height:12.96cqi}
+    .comal{position:relative;right:auto;top:auto;translate:none;width:min(34cqi,50vh);margin:-5cqi 6% 0 auto}
+    .hero-pie{position:absolute;left:0;bottom:0;width:52%;margin:0}
+    .tallado{padding-bottom:0}
+    .visita-grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:center}
+    .visita-texto{grid-column:1}
+    .visita-foto{grid-column:2;grid-row:1 / span 2}
+    .contacto-grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+    .direccion .dl{height:15cqi;margin-bottom:1.4cqi}
+  }
+</style>
+</head>
+<body>
+
+<!-- Filtros de impresión: convierten las fotos en estampas a dos tintas (barro + terracota) o a una tinta (barro) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="dos-tintas" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="0.36 0.42 0.14 0 -0.08  0.36 0.42 0.14 0 -0.08  0.36 0.42 0.14 0 -0.08  0 0 0 1 0"/>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.290 0.659 0.953"/>
+      <feFuncG type="table" tableValues="0.102 0.251 0.902"/>
+      <feFuncB type="table" tableValues="0.059 0.106 0.812"/>
+    </feComponentTransfer>
+  </filter>
+  <filter id="una-tinta" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="0.36 0.42 0.14 0 -0.06  0.36 0.42 0.14 0 -0.06  0.36 0.42 0.14 0 -0.06  0 0 0 1 0"/>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.290 0.953"/>
+      <feFuncG type="table" tableValues="0.102 0.902"/>
+      <feFuncB type="table" tableValues="0.059 0.812"/>
+    </feComponentTransfer>
+  </filter>
+</svg>
+
+<div class="demo-tag" role="note">Sitio de ejemplo · hecho por M4PL3 <span>— no es la página oficial del negocio</span></div>
+
+<header class="wrap top">
+  <nav aria-label="Secciones">
+    <a href="#platillos">Platillos</a>
+    <a href="#visita">Visítanos</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <a class="sello chico" href="https://ig.me/m/oaxacadmicorazon" target="_blank" rel="noopener" aria-label="Escríbenos por DM en Instagram">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.4 7.6L3 21l1.5-5.2A8.5 8.5 0 1 1 21 12z"/></svg>
+    DM
+  </a>
+</header>
+
+<main>
+
+  <!-- ================= HERO ================= -->
+  <section class="wrap" aria-labelledby="titulo">
+    <div class="plancha">
+      <h1 class="nombre" id="titulo">Oaxaca de mi Corazón <small>Tlayudería</small></h1>
+
+      <div class="tallado">
+        <p class="silabas" role="img" aria-label="Tlayudas">
+          <span class="sil"><svg class="carve" viewBox="0 0 190 70" aria-hidden="true" focusable="false" preserveAspectRatio="xMinYMin meet"><path class="ink" d="M0 0H10V10H0ZM10 0H20V10H10ZM20 0H30V10H20ZM30 0H40V10H30ZM40 0H50V10H40ZM50 0H60V10H50ZM0 10H10V20H0ZM10 10H20V20H10ZM20 10H30V20H20ZM30 10H40V20H30ZM40 10H50V20H40ZM50 10H60V20H50ZM20 20H30V30H20ZM30 20H40V30H30ZM20 30H30V40H20ZM30 30H40V40H30ZM20 40H30V50H20ZM30 40H40V50H30ZM20 50H30V60H20ZM30 50H40V60H30ZM20 60H30V70H20ZM30 60H40V70H30ZM70 0H80V10H70ZM80 0H90V10H80ZM70 10H80V20H70ZM80 10H90V20H80ZM70 20H80V30H70ZM80 20H90V30H80ZM70 30H80V40H70ZM80 30H90V40H80ZM70 40H80V50H70ZM80 40H90V50H80ZM70 50H80V60H70ZM80 50H90V60H80ZM90 50H100V60H90ZM100 50H110V60H100ZM110 50H120V60H110ZM70 60H80V70H70ZM80 60H90V70H80ZM90 60H100V70H90ZM100 60H110V70H100ZM110 60H120V70H110ZM140 0V10H130ZM140 0H150V10H140ZM150 0H160V10H150ZM160 0H170V10H160ZM170 0H180V10H170ZM180 0L190 10H180ZM130 10H140V20H130ZM140 10H150V20H140ZM170 10H180V20H170ZM180 10H190V20H180ZM130 20H140V30H130ZM140 20H150V30H140ZM170 20H180V30H170ZM180 20H190V30H180ZM130 30H140V40H130ZM140 30H150V40H140ZM150 30H160V40H150ZM160 30H170V40H160ZM170 30H180V40H170ZM180 30H190V40H180ZM130 40H140V50H130ZM140 40H150V50H140ZM170 40H180V50H170ZM180 40H190V50H180ZM130 50H140V60H130ZM140 50H150V60H140ZM170 50H180V60H170ZM180 50H190V60H180ZM130 60H140V70H130ZM140 60H150V70H140ZM170 60H180V70H170ZM180 60H190V70H180Z"/><path class="fleck" d="M1.1260301813715494 5Q4.268542889375768 4.1 7.411055597379985 4.7L7.411055597379985 5.25Q4.268542889375768 4.8 1.1260301813715494 5ZM53.51757344368147 5Q55.677579636464365 4.1 57.83758582924726 4.7L57.83758582924726 5.25Q55.677579636464365 4.8 53.51757344368147 5ZM27.679798530251208 47Q25.19488313172778 46.1 22.70996773320436 46.7L22.70996773320436 47.25Q25.19488313172778 46.8 27.679798530251208 47ZM28.86781977287416 56Q25.1456877537059 55.1 21.423555734537636 55.7L21.423555734537636 56.25Q25.1456877537059 55.8 28.86781977287416 56ZM28.475789954928313 67Q25.72679043431613 66.1 22.97779091370395 66.7L22.97779091370395 67.25Q25.72679043431613 66.8 28.475789954928313 67ZM31.76385887597009 64Q34.07406450874662 63.1 36.38427014152316 63.7L36.38427014152316 64.25Q34.07406450874662 63.8 31.76385887597009 64ZM88.94415280419767 2Q84.99398260039872 1.1 81.04381239659976 1.7L81.04381239659976 2.25Q84.99398260039872 1.8 88.94415280419767 2ZM79.17644891131322 45Q75.07243632476336 44.1 70.9684237382135 44.7L70.9684237382135 45.25Q75.07243632476336 44.8 79.17644891131322 45ZM88.58462408965399 56Q86.28645691583387 55.1 83.98828974201375 55.7L83.98828974201375 56.25Q86.28645691583387 55.8 88.58462408965399 56ZM92.32699085931321 65Q95.16101964031701 64.1 97.99504842132079 64.7L97.99504842132079 65.25Q95.16101964031701 64.8 92.32699085931321 65ZM138.97489925908184 34Q135.05493089177904 33.1 131.13496252447626 33.7L131.13496252447626 34.25Q135.05493089177904 33.8 138.97489925908184 34ZM146.31071490646573 36Q143.89505847944747 35.1 141.4794020524292 35.7L141.4794020524292 36.25Q143.89505847944747 35.8 146.31071490646573 36Z"/></svg></span>
+          <span class="sil"><svg class="carve" viewBox="0 0 130 70" aria-hidden="true" focusable="false" preserveAspectRatio="xMinYMin meet"><path class="ink" d="M0 0H10V10H0ZM10 0H20V10H10ZM40 0H50V10H40ZM50 0H60V10H50ZM0 10H10V20H0ZM10 10H20V20H10ZM40 10H50V20H40ZM50 10H60V20H50ZM0 20H10V30ZM10 20H20V30H10ZM20 20H30V30H20ZM30 20H40V30H30ZM40 20H50V30H40ZM50 20H60L50 30ZM10 30H20V40ZM20 30H30V40H20ZM30 30H40V40H30ZM40 30H50L40 40ZM20 40H30V50H20ZM30 40H40V50H30ZM20 50H30V60H20ZM30 50H40V60H30ZM20 60H30V70H20ZM30 60H40V70H30ZM70 0H80V10H70ZM80 0H90V10H80ZM110 0H120V10H110ZM120 0H130V10H120ZM70 10H80V20H70ZM80 10H90V20H80ZM110 10H120V20H110ZM120 10H130V20H120ZM70 20H80V30H70ZM80 20H90V30H80ZM110 20H120V30H110ZM120 20H130V30H120ZM70 30H80V40H70ZM80 30H90V40H80ZM110 30H120V40H110ZM120 30H130V40H120ZM70 40H80V50H70ZM80 40H90V50H80ZM110 40H120V50H110ZM120 40H130V50H120ZM70 50H80V60H70ZM80 50H90V60H80ZM90 50H100V60H90ZM100 50H110V60H100ZM110 50H120V60H110ZM120 50H130V60H120ZM70 60H80V70ZM80 60H90V70H80ZM90 60H100V70H90ZM100 60H110V70H100ZM110 60H120V70H110ZM120 60H130L120 70Z"/><path class="fleck" d="M53.350740530164735 2Q55.89495622831943 1.1 58.439171926474124 1.7L58.439171926474124 2.25Q55.89495622831943 1.8 53.350740530164735 2ZM12.021096205689698 14Q15.426253635997908 13.1 18.831411066306117 13.7L18.831411066306117 14.25Q15.426253635997908 13.8 12.021096205689698 14ZM121.92508048867623 6Q125.25402059472655 5.1 128.58296070077688 5.7L128.58296070077688 6.25Q125.25402059472655 5.8 121.92508048867623 6ZM119.15564085338787 25Q114.79065458636205 24.1 110.42566831933624 24.7L110.42566831933624 25.25Q114.79065458636205 24.8 119.15564085338787 25Z"/></svg></span>
+          <span class="sil"><svg class="carve" viewBox="0 0 200 70" aria-hidden="true" focusable="false" preserveAspectRatio="xMinYMin meet"><path class="ink" d="M0 0H10V10H0ZM10 0H20V10H10ZM20 0H30V10H20ZM30 0H40V10H30ZM40 0H50V10H40ZM50 0L60 10H50ZM0 10H10V20H0ZM10 10H20V20H10ZM40 10H50V20H40ZM50 10H60V20H50ZM0 20H10V30H0ZM10 20H20V30H10ZM40 20H50V30H40ZM50 20H60V30H50ZM0 30H10V40H0ZM10 30H20V40H10ZM40 30H50V40H40ZM50 30H60V40H50ZM0 40H10V50H0ZM10 40H20V50H10ZM40 40H50V50H40ZM50 40H60V50H50ZM0 50H10V60H0ZM10 50H20V60H10ZM40 50H50V60H40ZM50 50H60V60H50ZM0 60H10V70H0ZM10 60H20V70H10ZM20 60H30V70H20ZM30 60H40V70H30ZM40 60H50V70H40ZM50 60H60L50 70ZM80 0V10H70ZM80 0H90V10H80ZM90 0H100V10H90ZM100 0H110V10H100ZM110 0H120V10H110ZM120 0L130 10H120ZM70 10H80V20H70ZM80 10H90V20H80ZM110 10H120V20H110ZM120 10H130V20H120ZM70 20H80V30H70ZM80 20H90V30H80ZM110 20H120V30H110ZM120 20H130V30H120ZM70 30H80V40H70ZM80 30H90V40H80ZM90 30H100V40H90ZM100 30H110V40H100ZM110 30H120V40H110ZM120 30H130V40H120ZM70 40H80V50H70ZM80 40H90V50H80ZM110 40H120V50H110ZM120 40H130V50H120ZM70 50H80V60H70ZM80 50H90V60H80ZM110 50H120V60H110ZM120 50H130V60H120ZM70 60H80V70H70ZM80 60H90V70H80ZM110 60H120V70H110ZM120 60H130V70H120ZM150 0V10H140ZM150 0H160V10H150ZM160 0H170V10H160ZM170 0H180V10H170ZM180 0H190V10H180ZM190 0L200 10H190ZM140 10H150V20H140ZM150 10H160V20H150ZM180 10H190V20H180ZM190 10H200V20H190ZM140 20H150V30H140ZM150 20H160V30H150ZM140 30H150V40ZM150 30H160V40H150ZM160 30H170V40H160ZM170 30H180V40H170ZM180 30H190V40H180ZM190 30L200 40H190ZM180 40H190V50H180ZM190 40H200V50H190ZM140 50H150V60H140ZM150 50H160V60H150ZM180 50H190V60H180ZM190 50H200V60H190ZM140 60H150V70ZM150 60H160V70H150ZM160 60H170V70H160ZM170 60H180V70H170ZM180 60H190V70H180ZM190 60H200L190 70Z"/><path class="fleck" d="M88.80733233178523 2Q84.99526566388293 1.1 81.18319899598063 1.7L81.18319899598063 2.25Q84.99526566388293 1.8 88.80733233178523 2ZM91.45313170849218 5Q94.86370013110924 4.1 98.2742685537263 4.7L98.2742685537263 5.25Q94.86370013110924 4.8 91.45313170849218 5ZM119.25888439954934 23Q115.06823186164685 22.1 110.87757932374434 22.7L110.87757932374434 23.25Q115.06823186164685 22.8 119.25888439954934 23ZM78.00093878890472 35Q74.88231449679589 34.1 71.76369020468704 34.7L71.76369020468704 35.25Q74.88231449679589 34.8 78.00093878890472 35ZM77.7099758355756 43Q75.48283545987688 42.1 73.25569508417817 42.7L73.25569508417817 43.25Q75.48283545987688 42.8 77.7099758355756 43ZM128.93121542186591 56Q126.2749526068309 55.1 123.61868979179589 55.7L123.61868979179589 56.25Q126.2749526068309 55.8 128.93121542186591 56ZM172.3116927621701 35Q175.08080200459568 34.1 177.84991124702123 34.7L177.84991124702123 35.25Q175.08080200459568 34.8 172.3116927621701 35Z"/></svg></span>
+        </p>
+        <figure class="comal">
+          <!-- FOTO TEMPORAL (Unsplash). Reemplazar por una foto real de una tlayuda del negocio, tomada desde arriba
+               y centrada (se recorta en círculo y se imprime a dos tintas automáticamente). Cambiar src y alt. -->
+          <img src="https://images.unsplash.com/photo-1599232288126-7dbd2127db14?w=1100&q=80&auto=format&fit=crop"
+               alt="Tortilla grande de maíz sobre un tenate (foto de referencia)" width="1100" height="1100" fetchpriority="high">
+        </figure>
+        <div class="hero-pie">
+          <p class="lead"><strong>Restaurante oaxaqueño en Puebla.</strong> Las tlayudas son nuestro plato estrella; también tenemos diferentes platillos y degustación de moles.</p>
+          <div class="acciones">
+            <a class="sello" href="https://ig.me/m/oaxacadmicorazon" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.4 7.6L3 21l1.5-5.2A8.5 8.5 0 1 1 21 12z"/></svg>
+              Escríbenos por DM
+            </a>
+            <a class="dir" href="#visita">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              Av. 5 Ote 404, Puebla
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PLATILLOS ================= -->
+  <section class="seccion" id="platillos" aria-labelledby="t-platillos">
+    <div class="wrap">
+      <h2 class="titulo-tallado" id="t-platillos"><span class="sr">Platillos</span><svg class="carve" viewBox="0 0 550 70" aria-hidden="true" focusable="false" preserveAspectRatio="xMinYMin meet"><path class="ink" d="M0 0H10V10H0ZM10 0H20V10H10ZM20 0H30V10H20ZM30 0H40V10H30ZM40 0H50V10H40ZM50 0L60 10H50ZM0 10H10V20H0ZM10 10H20V20H10ZM40 10H50V20H40ZM50 10H60V20H50ZM0 20H10V30H0ZM10 20H20V30H10ZM40 20H50V30H40ZM50 20H60V30H50ZM0 30H10V40H0ZM10 30H20V40H10ZM20 30H30V40H20ZM30 30H40V40H30ZM40 30H50V40H40ZM50 30H60L50 40ZM0 40H10V50H0ZM10 40H20V50H10ZM0 50H10V60H0ZM10 50H20V60H10ZM0 60H10V70H0ZM10 60H20V70H10ZM70 0H80V10H70ZM80 0H90V10H80ZM70 10H80V20H70ZM80 10H90V20H80ZM70 20H80V30H70ZM80 20H90V30H80ZM70 30H80V40H70ZM80 30H90V40H80ZM70 40H80V50H70ZM80 40H90V50H80ZM70 50H80V60H70ZM80 50H90V60H80ZM90 50H100V60H90ZM100 50H110V60H100ZM110 50H120V60H110ZM70 60H80V70H70ZM80 60H90V70H80ZM90 60H100V70H90ZM100 60H110V70H100ZM110 60H120V70H110ZM140 0V10H130ZM140 0H150V10H140ZM150 0H160V10H150ZM160 0H170V10H160ZM170 0H180V10H170ZM180 0L190 10H180ZM130 10H140V20H130ZM140 10H150V20H140ZM170 10H180V20H170ZM180 10H190V20H180ZM130 20H140V30H130ZM140 20H150V30H140ZM170 20H180V30H170ZM180 20H190V30H180ZM130 30H140V40H130ZM140 30H150V40H140ZM150 30H160V40H150ZM160 30H170V40H160ZM170 30H180V40H170ZM180 30H190V40H180ZM130 40H140V50H130ZM140 40H150V50H140ZM170 40H180V50H170ZM180 40H190V50H180ZM130 50H140V60H130ZM140 50H150V60H140ZM170 50H180V60H170ZM180 50H190V60H180ZM130 60H140V70H130ZM140 60H150V70H140ZM170 60H180V70H170ZM180 60H190V70H180ZM200 0H210V10H200ZM210 0H220V10H210ZM220 0H230V10H220ZM230 0H240V10H230ZM240 0H250V10H240ZM250 0H260V10H250ZM200 10H210V20H200ZM210 10H220V20H210ZM220 10H230V20H220ZM230 10H240V20H230ZM240 10H250V20H240ZM250 10H260V20H250ZM220 20H230V30H220ZM230 20H240V30H230ZM220 30H230V40H220ZM230 30H240V40H230ZM220 40H230V50H220ZM230 40H240V50H230ZM220 50H230V60H220ZM230 50H240V60H230ZM220 60H230V70H220ZM230 60H240V70H230ZM270 0H280V10H270ZM280 0H290V10H280ZM270 10H280V20H270ZM280 10H290V20H280ZM270 20H280V30H270ZM280 20H290V30H280ZM270 30H280V40H270ZM280 30H290V40H280ZM270 40H280V50H270ZM280 40H290V50H280ZM270 50H280V60H270ZM280 50H290V60H280ZM270 60H280V70H270ZM280 60H290V70H280ZM300 0H310V10H300ZM310 0H320V10H310ZM300 10H310V20H300ZM310 10H320V20H310ZM300 20H310V30H300ZM310 20H320V30H310ZM300 30H310V40H300ZM310 30H320V40H310ZM300 40H310V50H300ZM310 40H320V50H310ZM300 50H310V60H300ZM310 50H320V60H310ZM320 50H330V60H320ZM330 50H340V60H330ZM340 50H350V60H340ZM300 60H310V70H300ZM310 60H320V70H310ZM320 60H330V70H320ZM330 60H340V70H330ZM340 60H350V70H340ZM360 0H370V10H360ZM370 0H380V10H370ZM360 10H370V20H360ZM370 10H380V20H370ZM360 20H370V30H360ZM370 20H380V30H370ZM360 30H370V40H360ZM370 30H380V40H370ZM360 40H370V50H360ZM370 40H380V50H370ZM360 50H370V60H360ZM370 50H380V60H370ZM380 50H390V60H380ZM390 50H400V60H390ZM400 50H410V60H400ZM360 60H370V70H360ZM370 60H380V70H370ZM380 60H390V70H380ZM390 60H400V70H390ZM400 60H410V70H400ZM430 0V10H420ZM430 0H440V10H430ZM440 0H450V10H440ZM450 0H460V10H450ZM460 0H470V10H460ZM470 0L480 10H470ZM420 10H430V20H420ZM430 10H440V20H430ZM460 10H470V20H460ZM470 10H480V20H470ZM420 20H430V30H420ZM430 20H440V30H430ZM460 20H470V30H460ZM470 20H480V30H470ZM420 30H430V40H420ZM430 30H440V40H430ZM460 30H470V40H460ZM470 30H480V40H470ZM420 40H430V50H420ZM430 40H440V50H430ZM460 40H470V50H460ZM470 40H480V50H470ZM420 50H430V60H420ZM430 50H440V60H430ZM460 50H470V60H460ZM470 50H480V60H470ZM420 60H430V70ZM430 60H440V70H430ZM440 60H450V70H440ZM450 60H460V70H450ZM460 60H470V70H460ZM470 60H480L470 70ZM500 0V10H490ZM500 0H510V10H500ZM510 0H520V10H510ZM520 0H530V10H520ZM530 0H540V10H530ZM540 0L550 10H540ZM490 10H500V20H490ZM500 10H510V20H500ZM530 10H540V20H530ZM540 10H550V20H540ZM490 20H500V30H490ZM500 20H510V30H500ZM490 30H500V40ZM500 30H510V40H500ZM510 30H520V40H510ZM520 30H530V40H520ZM530 30H540V40H530ZM540 30L550 40H540ZM530 40H540V50H530ZM540 40H550V50H540ZM490 50H500V60H490ZM500 50H510V60H500ZM530 50H540V60H530ZM540 50H550V60H540ZM490 60H500V70ZM500 60H510V70H500ZM510 60H520V70H510ZM520 60H530V70H520ZM530 60H540V70H530ZM540 60H550L540 70Z"/><path class="fleck" d="M50.982656517863994 15Q54.996598257320244 14.1 59.010539996776494 14.7L59.010539996776494 15.25Q54.996598257320244 14.8 50.982656517863994 15ZM31.56655031925424 36Q33.66449893413421 35.1 35.76244754901417 35.7L35.76244754901417 36.25Q33.66449893413421 35.8 31.56655031925424 36ZM1.703397913112738 57Q5.271545241694433 56.1 8.839692570276128 56.7L8.839692570276128 57.25Q5.271545241694433 56.8 1.703397913112738 57ZM150.91212499059156 4Q154.9711836638195 3.1 159.0302423370474 3.7L159.0302423370474 4.25Q154.9711836638195 3.8 150.91212499059156 4ZM138.90415890978966 17Q134.95627055572945 16.1 131.00838220166924 16.7L131.00838220166924 17.25Q134.95627055572945 16.8 138.90415890978966 17ZM171.99767909877664 46Q175.12317829538927 45.1 178.2486774920019 45.7L178.2486774920019 46.25Q175.12317829538927 45.8 171.99767909877664 46ZM188.98937329419252 67Q186.25345689474065 66.1 183.51754049528876 66.7L183.51754049528876 67.25Q186.25345689474065 66.8 188.98937329419252 67ZM227.77851380098167 42Q225.56889000744357 41.1 223.35926621390547 41.7L223.35926621390547 42.25Q225.56889000744357 41.8 227.77851380098167 42ZM224.07407023079284 65Q226.52176069393988 64.1 228.96945115708695 64.7L228.96945115708695 65.25Q226.52176069393988 64.8 224.07407023079284 65ZM301.42386635753525 44Q304.90432706090365 43.1 308.38478776427206 43.7L308.38478776427206 44.25Q304.90432706090365 43.8 301.42386635753525 44ZM301.903213912964 54Q304.19050866115373 53.1 306.47780340934344 53.7L306.47780340934344 54.25Q304.19050866115373 53.8 301.903213912964 54ZM312.0960180957397 58Q315.0874296805164 57.1 318.0788412652931 57.7L318.0788412652931 58.25Q315.0874296805164 57.8 312.0960180957397 58ZM371.9190312705089 46Q374.58585067640615 45.1 377.25267008230344 45.7L377.25267008230344 46.25Q374.58585067640615 45.8 371.9190312705089 46ZM378.97882786921986 57Q375.56569163950616 56.1 372.15255540979246 56.7L372.15255540979246 57.25Q375.56569163950616 56.8 378.97882786921986 57ZM501.0946814336335 6Q504.9774416299484 5.1 508.8602018262632 5.7L508.8602018262632 6.25Q504.9774416299484 5.8 501.0946814336335 6ZM532.2256196575815 15Q534.6938500460507 14.1 537.1620804345198 14.7L537.1620804345198 15.25Q534.6938500460507 14.8 532.2256196575815 15ZM510.522367662002 67Q514.8049021620698 66.1 519.0874366621374 66.7L519.0874366621374 67.25Q514.8049021620698 66.8 510.522367662002 67Z"/></svg></h2>
+      <p class="intro">Sazón oaxaqueña en Puebla. Para precios, horarios y lo que hay en el día, pregúntanos por DM.</p>
+
+      <div class="pliego">
+        <article class="entrada estrella">
+          <figure>
+            <!-- FOTO TEMPORAL (Unsplash). Reemplazar por una foto real de una tlayuda servida en el restaurante. -->
+            <img src="https://images.unsplash.com/photo-1650221189650-a3b6648d8326?w=1200&q=80&auto=format&fit=crop"
+                 alt="Tlayuda doblada servida en la mesa (foto de referencia)" loading="lazy" width="1200" height="960">
+          </figure>
+          <div>
+            <h3>Tlayudas <span class="marca-estrella">plato estrella</span></h3>
+            <p>Nuestro plato estrella. Si es tu primera vez con nosotros, empieza por aquí.</p>
+            <a class="pregunta" href="https://ig.me/m/oaxacadmicorazon" target="_blank" rel="noopener">Pregunta por las opciones del día <svg class="flecha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </article>
+
+        <article class="entrada">
+          <figure>
+            <!-- FOTO TEMPORAL (Unsplash). Reemplazar por una foto real de la degustación de moles del negocio. -->
+            <img src="https://images.unsplash.com/photo-1786052600217-992704210ff8?w=1000&q=80&auto=format&fit=crop"
+                 alt="Platillo con salsa de mole (foto de referencia)" loading="lazy" width="1000" height="750">
+          </figure>
+          <div>
+            <h3>Degustación de moles</h3>
+            <p>Una forma de probar varios moles en una sola visita. Pregúntanos qué moles tenemos disponibles.</p>
+            <a class="pregunta" href="https://ig.me/m/oaxacadmicorazon" target="_blank" rel="noopener">Pregunta por la degustación <svg class="flecha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </article>
+
+        <article class="entrada">
+          <figure>
+            <!-- FOTO TEMPORAL (Unsplash). Reemplazar por una foto real de otros platillos del negocio (mesa servida). -->
+            <img src="https://images.unsplash.com/photo-1731090390538-d814c9925232?w=1000&q=80&auto=format&fit=crop"
+                 alt="Mesa con varios platillos mexicanos (foto de referencia)" loading="lazy" width="1000" height="750">
+          </figure>
+          <div>
+            <h3>Diferentes platillos</h3>
+            <p>Además de tlayudas y moles, manejamos diferentes platillos oaxaqueños.</p>
+            <a class="pregunta" href="https://ig.me/m/oaxacadmicorazon" target="_blank" rel="noopener">Pregunta qué hay hoy <svg class="flecha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </article>
+
+        <div class="entrada pendiente">
+          <div>
+            <h3>El resto del menú, por DM</h3>
+            <p>Por ahora compartimos el menú completo por mensaje directo en Instagram. Escríbenos y te contamos qué hay, precios y horarios.</p>
+            <!-- ESPACIO PARA PLATILLOS REALES
+                 Cuando el negocio confirme su menú, agregar aquí cada platillo como un <article class="entrada">
+                 (copiar la estructura de las entradas de arriba) y quitar estos renglones en blanco.
+                 No agregar nombres ni precios sin que el negocio los confirme. -->
+            <div class="renglones" aria-hidden="true">
+              <small>Espacio reservado para los platillos de la casa</small>
+              <span></span><span></span><span></span>
+            </div>
+            <a class="sello" href="https://ig.me/m/oaxacadmicorazon" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.4 7.6L3 21l1.5-5.2A8.5 8.5 0 1 1 21 12z"/></svg>
+              Pide el menú por DM
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VISITA ================= -->
+  <section class="seccion" id="visita" aria-labelledby="t-visita">
+    <div class="wrap visita-grid">
+      <h2 class="direccion" id="t-visita">
+        <span class="sr">Visítanos en Av. 5 Ote 404, Puebla</span>
+        <span class="dl"><svg class="carve" viewBox="0 0 260 70" aria-hidden="true" focusable="false" preserveAspectRatio="xMinYMin meet"><path class="ink" d="M10 0V10H0ZM10 0H20V10H10ZM20 0H30V10H20ZM30 0H40V10H30ZM40 0H50V10H40ZM50 0L60 10H50ZM0 10H10V20H0ZM10 10H20V20H10ZM40 10H50V20H40ZM50 10H60V20H50ZM0 20H10V30H0ZM10 20H20V30H10ZM40 20H50V30H40ZM50 20H60V30H50ZM0 30H10V40H0ZM10 30H20V40H10ZM20 30H30V40H20ZM30 30H40V40H30ZM40 30H50V40H40ZM50 30H60V40H50ZM0 40H10V50H0ZM10 40H20V50H10ZM40 40H50V50H40ZM50 40H60V50H50ZM0 50H10V60H0ZM10 50H20V60H10ZM40 50H50V60H40ZM50 50H60V60H50ZM0 60H10V70H0ZM10 60H20V70H10ZM40 60H50V70H40ZM50 60H60V70H50ZM70 0H80V10H70ZM80 0H90V10H80ZM110 0H120V10H110ZM120 0H130V10H120ZM70 10H80V20H70ZM80 10H90V20H80ZM110 10H120V20H110ZM120 10H130V20H120ZM70 20H80V30H70ZM80 20H90V30H80ZM110 20H120V30H110ZM120 20H130V30H120ZM70 30H80V40H70ZM80 30H90V40H80ZM110 30H120V40H110ZM120 30H130V40H120ZM70 40H80V50H70ZM80 40H90V50H80ZM110 40H120V50H110ZM120 40H130V50H120ZM70 50H80V60ZM80 50H90V60H80ZM90 50L100 60H90ZM110 50V60H100ZM110 50H120V60H110ZM120 50H130L120 60ZM80 60H90V70ZM90 60H100V70H90ZM100 60H110V70H100ZM110 60H120L110 70ZM140 50H150V60H140ZM150 50H160V60H150ZM140 60H150V70H140ZM150 60H160V70H150ZM200 0H210V10H200ZM210 0H220V10H210ZM220 0H230V10H220ZM230 0H240V10H230ZM240 0H250V10H240ZM250 0H260V10H250ZM200 10H210V20H200ZM210 10H220V20H210ZM200 20H210V30H200ZM210 20H220V30H210ZM200 30H210V40H200ZM210 30H220V40H210ZM220 30H230V40H220ZM230 30H240V40H230ZM240 30H250V40H240ZM250 30L260 40H250ZM240 40H250V50H240ZM250 40H260V50H250ZM200 50H210V60H200ZM210 50H220V60H210ZM240 50H250V60H240ZM250 50H260V60H250ZM200 60H210V70ZM210 60H220V70H210ZM220 60H230V70H220ZM230 60H240V70H230ZM240 60H250V70H240ZM250 60H260L250 70Z"/><path class="fleck" d="M88.79752854960739 4Q84.91476835329256 3.1 81.03200815697772 3.7L81.03200815697772 4.25Q84.91476835329256 3.8 88.79752854960739 4ZM113.31055556904793 17Q115.77878595751704 16.1 118.24701634598617 16.7L118.24701634598617 17.25Q115.77878595751704 16.8 113.31055556904793 17ZM79.02198957366652 45Q74.59714383278644 44.1 70.17229809190636 44.7L70.17229809190636 45.25Q74.59714383278644 44.8 79.02198957366652 45ZM90.80024660489435 62Q95.08278110496207 61.1 99.36531560502978 61.7L99.36531560502978 62.25Q95.08278110496207 61.8 90.80024660489435 62ZM208.1673272574271 28Q204.7270842840519 27.1 201.28684131067672 27.7L201.28684131067672 28.25Q204.7270842840519 27.8 208.1673272574271 28Z"/></svg></span>
+        <span class="dl"><svg class="carve" viewBox="0 0 190 70" aria-hidden="true" focusable="false" preserveAspectRatio="xMinYMin meet"><path class="ink" d="M10 0V10H0ZM10 0H20V10H10ZM20 0H30V10H20ZM30 0H40V10H30ZM40 0H50V10H40ZM50 0L60 10H50ZM0 10H10V20H0ZM10 10H20V20H10ZM40 10H50V20H40ZM50 10H60V20H50ZM0 20H10V30H0ZM10 20H20V30H10ZM40 20H50V30H40ZM50 20H60V30H50ZM0 30H10V40H0ZM10 30H20V40H10ZM40 30H50V40H40ZM50 30H60V40H50ZM0 40H10V50H0ZM10 40H20V50H10ZM40 40H50V50H40ZM50 40H60V50H50ZM0 50H10V60H0ZM10 50H20V60H10ZM40 50H50V60H40ZM50 50H60V60H50ZM0 60H10V70ZM10 60H20V70H10ZM20 60H30V70H20ZM30 60H40V70H30ZM40 60H50V70H40ZM50 60H60L50 70ZM70 0H80V10H70ZM80 0H90V10H80ZM90 0H100V10H90ZM100 0H110V10H100ZM110 0H120V10H110ZM120 0H130V10H120ZM70 10H80V20H70ZM80 10H90V20H80ZM90 10H100V20H90ZM100 10H110V20H100ZM110 10H120V20H110ZM120 10H130V20H120ZM90 20H100V30H90ZM100 20H110V30H100ZM90 30H100V40H90ZM100 30H110V40H100ZM90 40H100V50H90ZM100 40H110V50H100ZM90 50H100V60H90ZM100 50H110V60H100ZM90 60H100V70H90ZM100 60H110V70H100ZM140 0H150V10H140ZM150 0H160V10H150ZM160 0H170V10H160ZM170 0H180V10H170ZM180 0H190V10H180ZM140 10H150V20H140ZM150 10H160V20H150ZM140 20H150V30H140ZM150 20H160V30H150ZM140 30H150V40H140ZM150 30H160V40H150ZM160 30H170V40H160ZM170 30H180V40H170ZM140 40H150V50H140ZM150 40H160V50H150ZM140 50H150V60H140ZM150 50H160V60H150ZM140 60H150V70H140ZM150 60H160V70H150ZM160 60H170V70H160ZM170 60H180V70H170ZM180 60H190V70H180Z"/><path class="fleck" d="M49.0940174608982 15Q44.75950580019881 14.1 40.424994139499425 14.7L40.424994139499425 15.25Q44.75950580019881 14.8 49.0940174608982 15ZM98.97424469292318 17Q95.01631891260593 16.1 91.05839313228866 16.7L91.05839313228866 17.25Q95.01631891260593 16.8 98.97424469292318 17ZM108.77945730823247 15Q105.01066449662154 14.1 101.24187168501062 14.7L101.24187168501062 15.25Q105.01066449662154 14.8 108.77945730823247 15ZM178.76485708070163 8Q174.96003032706741 7.1 171.1552035734332 7.7L171.1552035734332 8.25Q174.96003032706741 7.8 178.76485708070163 8Z"/></svg></span>
+        <span class="dl"><svg class="carve" viewBox="0 0 190 70" aria-hidden="true" focusable="false" preserveAspectRatio="xMinYMin meet"><path class="ink" d="M0 0H10V10H0ZM10 0H20V10H10ZM40 0H50V10H40ZM50 0H60V10H50ZM0 10H10V20H0ZM10 10H20V20H10ZM40 10H50V20H40ZM50 10H60V20H50ZM0 20H10V30H0ZM10 20H20V30H10ZM40 20H50V30H40ZM50 20H60V30H50ZM0 30H10V40H0ZM10 30H20V40H10ZM20 30H30V40H20ZM30 30H40V40H30ZM40 30H50V40H40ZM50 30H60V40H50ZM40 40H50V50H40ZM50 40H60V50H50ZM40 50H50V60H40ZM50 50H60V60H50ZM40 60H50V70H40ZM50 60H60V70H50ZM80 0V10H70ZM80 0H90V10H80ZM90 0H100V10H90ZM100 0H110V10H100ZM110 0L120 10H110ZM70 10H80V20H70ZM80 10H90V20H80ZM100 10H110V20H100ZM110 10H120V20H110ZM70 20H80V30H70ZM80 20H90V30H80ZM100 20H110V30H100ZM110 20H120V30H110ZM70 30H80V40H70ZM80 30H90V40H80ZM100 30H110V40H100ZM110 30H120V40H110ZM70 40H80V50H70ZM80 40H90V50H80ZM100 40H110V50H100ZM110 40H120V50H110ZM70 50H80V60H70ZM80 50H90V60H80ZM100 50H110V60H100ZM110 50H120V60H110ZM70 60H80V70ZM80 60H90V70H80ZM90 60H100V70H90ZM100 60H110V70H100ZM110 60H120L110 70ZM130 0H140V10H130ZM140 0H150V10H140ZM170 0H180V10H170ZM180 0H190V10H180ZM130 10H140V20H130ZM140 10H150V20H140ZM170 10H180V20H170ZM180 10H190V20H180ZM130 20H140V30H130ZM140 20H150V30H140ZM170 20H180V30H170ZM180 20H190V30H180ZM130 30H140V40H130ZM140 30H150V40H140ZM150 30H160V40H150ZM160 30H170V40H160ZM170 30H180V40H170ZM180 30H190V40H180ZM170 40H180V50H170ZM180 40H190V50H180ZM170 50H180V60H170ZM180 50H190V60H180ZM170 60H180V70H170ZM180 60H190V70H180Z"/><path class="fleck" d="M50.813055940254415 13Q54.95669858352162 12.1 59.10034122678883 12.7L59.10034122678883 13.25Q54.95669858352162 12.8 50.813055940254415 13ZM1.1479417709324589 23Q4.752907152281189 22.1 8.35787253362992 22.7L8.35787253362992 23.25Q4.752907152281189 22.8 1.1479417709324589 23ZM42.208460539516594 48Q44.98332346894433 47.1 47.758186398372054 47.7L47.758186398372054 48.25Q44.98332346894433 47.8 42.208460539516594 48ZM48.41900680926152 66Q44.737684962316 65.1 41.05636311537048 65.7L41.05636311537048 66.25Q44.737684962316 65.8 48.41900680926152 66ZM109.19681193713261 15Q105.02529411827574 14.1 100.85377629941887 14.7L100.85377629941887 15.25Q105.02529411827574 14.8 109.19681193713261 15ZM171.19715839840958 25Q174.96715583851815 24.1 178.73715327862672 24.7L178.73715327862672 25.25Q174.96715583851815 24.8 171.19715839840958 25ZM170.87233870831136 55Q175.03469563261478 54.1 179.1970525569182 54.7L179.1970525569182 55.25Q175.03469563261478 54.8 170.87233870831136 55Z"/></svg></span>
+      </h2>
+      <div class="visita-texto">
+        <p class="ciudad">Puebla.</p>
+        <p>Te esperamos en Av. 5 Ote 404. Para los días y horarios de servicio, pregúntanos por DM.</p>
+        <a class="linea" href="https://www.google.com/maps/search/?api=1&amp;query=Av.%205%20Ote%20404%2C%20Puebla" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Cómo llegar
+        </a>
+      </div>
+      <figure class="visita-foto">
+        <!-- FOTO TEMPORAL (Unsplash). Reemplazar por una foto real de la fachada o del interior del restaurante (vertical 4:5). -->
+        <img src="https://images.unsplash.com/photo-1697410154169-b2bbf83758e6?w=1000&q=80&auto=format&fit=crop"
+             alt="Ollas de barro (foto de referencia)" loading="lazy" width="1000" height="1250">
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= CONTACTO ================= -->
+  <section class="seccion contacto" id="contacto" aria-labelledby="t-contacto">
+    <div class="wrap contacto-grid">
+      <h2 class="dm" id="t-contacto"><span class="sr">Escríbenos por DM</span><svg class="carve" viewBox="0 0 150 70" aria-hidden="true" focusable="false" preserveAspectRatio="xMinYMin meet"><path class="ink" d="M0 0H10V10H0ZM10 0H20V10H10ZM20 0H30V10H20ZM30 0H40V10H30ZM40 0H50V10H40ZM50 0L60 10H50ZM0 10H10V20H0ZM10 10H20V20H10ZM40 10H50V20H40ZM50 10H60V20H50ZM0 20H10V30H0ZM10 20H20V30H10ZM40 20H50V30H40ZM50 20H60V30H50ZM0 30H10V40H0ZM10 30H20V40H10ZM40 30H50V40H40ZM50 30H60V40H50ZM0 40H10V50H0ZM10 40H20V50H10ZM40 40H50V50H40ZM50 40H60V50H50ZM0 50H10V60H0ZM10 50H20V60H10ZM40 50H50V60H40ZM50 50H60V60H50ZM0 60H10V70H0ZM10 60H20V70H10ZM20 60H30V70H20ZM30 60H40V70H30ZM40 60H50V70H40ZM50 60H60L50 70ZM80 0V10H70ZM80 0H90V10H80ZM90 0H100V10H90ZM100 0H110V10H100ZM110 0H120V10H110ZM120 0H130V10H120ZM130 0H140V10H130ZM140 0L150 10H140ZM70 10H80V20H70ZM80 10H90V20H80ZM100 10H110V20H100ZM110 10H120V20H110ZM130 10H140V20H130ZM140 10H150V20H140ZM70 20H80V30H70ZM80 20H90V30H80ZM100 20H110V30H100ZM110 20H120V30H110ZM130 20H140V30H130ZM140 20H150V30H140ZM70 30H80V40H70ZM80 30H90V40H80ZM100 30H110V40H100ZM110 30H120V40H110ZM130 30H140V40H130ZM140 30H150V40H140ZM70 40H80V50H70ZM80 40H90V50H80ZM100 40H110V50H100ZM110 40H120V50H110ZM130 40H140V50H130ZM140 40H150V50H140ZM70 50H80V60H70ZM80 50H90V60H80ZM100 50H110V60H100ZM110 50H120V60H110ZM130 50H140V60H130ZM140 50H150V60H140ZM70 60H80V70H70ZM80 60H90V70H80ZM100 60H110V70H100ZM110 60H120V70H110ZM130 60H140V70H130ZM140 60H150V70H140Z"/><path class="fleck" d="M8.986085639955945 67Q6.2898519920347695 66.1 3.593618344113592 66.7L3.593618344113592 67.25Q6.2898519920347695 66.8 8.986085639955945 67ZM77.09995138796063 43Q74.14294057153718 42.1 71.18592975511372 42.7L71.18592975511372 43.25Q74.14294057153718 42.8 77.09995138796063 43ZM136.78314967912408 46Q134.4901010204148 45.1 132.19705236170552 45.7L132.19705236170552 46.25Q134.4901010204148 45.8 136.78314967912408 46ZM148.89730955378886 47Q145.1877384504075 46.1 141.47816734702613 46.7L141.47816734702613 47.25Q145.1877384504075 46.8 148.89730955378886 47ZM109.15025622118497 55Q104.97213832122084 54.1 100.79402042125672 54.7L100.79402042125672 55.25Q104.97213832122084 54.8 109.15025622118497 55ZM110.352398235588 52Q114.69320442908429 51.1 119.03401062258058 51.7L119.03401062258058 52.25Q114.69320442908429 51.8 110.352398235588 52ZM108.6670806253076 65Q105.04289880484977 64.1 101.41871698439192 64.7L101.41871698439192 65.25Q105.04289880484977 64.8 108.6670806253076 65ZM138.5649396281243 67Q134.79229452815736 66.1 131.01964942819043 66.7L131.01964942819043 67.25Q134.79229452815736 66.8 138.5649396281243 67Z"/></svg></h2>
+      <div>
+        <p class="grande">Escríbenos por Instagram.</p>
+        <p>Menú, precios, horarios o cualquier duda: mándanos un mensaje directo y te respondemos ahí.</p>
+        <a class="handle" href="https://www.instagram.com/oaxacadmicorazon/" target="_blank" rel="noopener">@oaxacadmicorazon</a>
+        <div>
+          <a class="sello" href="https://ig.me/m/oaxacadmicorazon" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            Enviar DM en Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Oaxaca de mi Corazón Tlayudería · Av. 5 Ote 404, Puebla</p>
+    <p>Las fotos de esta página son de referencia y se reemplazarán por fotos reales del negocio.</p>
+    <p class="firma">Sitio de ejemplo · hecho por M4PL3</p>
+  </div>
+</footer>
+
+<div class="barra-dm" id="barraDm">
+  <a class="sello" href="https://ig.me/m/oaxacadmicorazon" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.4 7.6L3 21l1.5-5.2A8.5 8.5 0 1 1 21 12z"/></svg>
+    Escríbenos por DM
+  </a>
+</div>
+
+<script>
+  (function () {
+    var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var comal = document.querySelector('.comal img');
+    var barra = document.getElementById('barraDm');
+    var hero = document.querySelector('.plancha');
+    var contacto = document.getElementById('contacto');
+    var pendiente = false;
+
+    function cuadro() {
+      pendiente = false;
+      var y = window.scrollY;
+      // El comal gira con el scroll, como la tlayuda que se voltea en el fuego
+      if (comal && !quieto) comal.style.transform = 'rotate(' + (y * 0.09).toFixed(2) + 'deg) scale(1.08)';
+      var pasoHero = hero.getBoundingClientRect().bottom < 0;
+      var c = contacto.getBoundingClientRect();
+      var enContacto = c.top < window.innerHeight && c.bottom > 0;
+      barra.classList.toggle('visible', pasoHero && !enContacto);
+    }
+    function pedir() { if (!pendiente) { pendiente = true; requestAnimationFrame(cuadro); } }
+    window.addEventListener('scroll', pedir, { passive: true });
+    window.addEventListener('resize', pedir);
+    cuadro();
+  })();
+</script>
+</body>
+</html>
